@@ -10,7 +10,7 @@ body {
     --game-board-size: 500px;
     --home-size: 200px;
     --positions-grid-width: calc(var(--game-board-size) - calc(var(--home-size) * 2));
-    --yellow: rgb(146, 146, 0);
+    --yellow: #f1c40f;
     --green: green;
     --red: red;
     --blue: blue;
@@ -54,19 +54,19 @@ body {
 .homes .home.green {
     bottom: 0;
     right: 0;
-    border: calc(var(--positions-grid-width) / 3) solid green;
+    border: calc(var(--positions-grid-width) / 3) solid var(--green);
 }
 
 .homes .home.red {
     bottom: 0;
     left: 0;
-    border: calc(var(--positions-grid-width) / 3) solid red;
+    border: calc(var(--positions-grid-width) / 3) solid var(--red);
 }
 
 .homes .home.blue {
     top: 0;
     left: 0;
-    border: calc(var(--positions-grid-width) / 3) solid blue;
+    border: calc(var(--positions-grid-width) / 3) solid var(--blue);
 }
 
 .home .start {
@@ -138,19 +138,19 @@ body {
 }
 
 .position-holder.green .position:nth-child(14) {
-    background-color: green;
+    background-color: var(--green);
 }
 
 .position-holder.green .position:nth-child(n+8):nth-child(-n+12) {
-    background-color: green;
+    background-color: var(--green);
 }
 
 .position-holder.red .position:nth-child(14) {
-    background-color: red;
+    background-color: var(--red);
 }
 
 .position-holder.red .position:nth-child(n+8):nth-child(-n+12) {
-    background-color: red;
+    background-color: var(--red);
 }
 
 .position-holder.yellow .position:nth-child(14) {
@@ -158,11 +158,11 @@ body {
 }
 
 .position-holder.blue .position:nth-child(n+8):nth-child(-n+12) {
-    background-color: blue;
+    background-color: var(--blue);
 }
 
 .position-holder.blue .position:nth-child(14) {
-    background-color: blue;
+    background-color: var(--blue);
 }
 
 .center {
@@ -190,9 +190,9 @@ body {
     width: 0px;
     height: 0px;
     border-top: var(--center-border-size) solid var(--yellow);
-    border-right: var(--center-border-size) solid green;
-    border-bottom: var(--center-border-size) solid red;
-    border-left: var(--center-border-size) solid blue;
+    border-right: var(--center-border-size) solid var(--green);
+    border-bottom: var(--center-border-size) solid var(--red);
+    border-left: var(--center-border-size) solid var(--blue);
 }
 
 .center .piece {
@@ -212,15 +212,15 @@ body {
 }
 
 .green.piece svg {
-    fill: green;
+    fill: var(--green);
 }
 
 .red.piece svg {
-    fill: red;
+    fill: var(--red);
 }
 
 .blue.piece svg {
-    fill: blue;
+    fill: var(--blue);
 }
 
 .position-holder.green .piece {
@@ -292,9 +292,17 @@ body {
 }
 
 .controls .player.red {
-    background-color: red;
+    background-color: var(--red);
 }
 
 .controls .player.yellow {
     background-color: var(--yellow);
+}
+
+.controls .player.blue {
+    background-color: var(--blue);
+}
+
+.controls .player.green {
+    background-color: var(--green);
 }
