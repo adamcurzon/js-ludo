@@ -1,4 +1,4 @@
-import { PLAYER_RULES } from "./playerRules.js";
+import { MAX_TRAVEL_DISTANCE, PLAYER_RULES } from "./playerRules.js";
 
 export class Piece {
     constructor(bus, player, index) {
@@ -24,16 +24,17 @@ export class Piece {
             this.pos++;
             this.pos = this.pos % 52;
             this.distanceTraveled++;
-            if (this.distanceTraveled > 52 && !this.homeStretch) {
+            if (this.distanceTraveled > MAX_TRAVEL_DISTANCE && !this.homeStretch) {
                 this.homeStretch = true;
                 console.log("piece has hit home stretch");
-                pos = 0;
+                this.pos = 0;
             }
             distance--;
         }
-        if (this.homeStretch && this.pos == 6) {
+        if (this.homeStretch && this.pos == 5) {
             console.log("piece is home safe");
             this.home = true;
+            this.inPlay = false;
         }
     }
 
@@ -45,7 +46,7 @@ export class Piece {
 
     isAbleToMove(distance) {
         if (!this.homeStretch) return true;
-        if (this.pos + distance > 6) return false;
+        if (this.pos + distance > 5) return false;
         return true;
     }
 
@@ -89,11 +90,12 @@ export class Piece {
             piecePositionDiv = document.querySelector('div[data-pos="start-' + this.player + '-' + this.index + '"]');
         }
 
-        if (this.homeStretch) {
-            console.log("Home stretch", this.index, this.player);
-            console.log('div[data-pos="home-stretch-' + this.player + '-' + this.pos + '"]');
+        if (this.homeStretch && this.pos != 5) {
             piecePositionDiv = document.querySelector('div[data-pos="home-stretch-' + this.player + '-' + this.pos + '"]');
-            return;
+        }
+
+        if (this.homeStretch && this.pos == 5) {
+            piecePositionDiv = document.querySelector('.center');
         }
 
         piecePositionDiv.appendChild(pieceHtml);

@@ -169,14 +169,34 @@ body {
     --center-border-size: calc(var(--positions-grid-width) / 2);
     position: relative;
     z-index: 999;
+    width: var(--positions-grid-width);
+    height: var(--positions-grid-width);
+    left: calc(50% - var(--center-border-size));
+    top: calc(50% - var(--center-border-size));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.center::before {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    --center-border-size: calc(var(--positions-grid-width) / 2);
     width: 0px;
     height: 0px;
     border-top: var(--center-border-size) solid var(--yellow);
     border-right: var(--center-border-size) solid green;
     border-bottom: var(--center-border-size) solid red;
     border-left: var(--center-border-size) solid blue;
-    left: calc(50% - var(--center-border-size));
-    top: calc(50% - var(--center-border-size));
+}
+
+.center .piece {
+    position: static !important;
 }
 
 .piece {

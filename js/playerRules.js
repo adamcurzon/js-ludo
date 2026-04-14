@@ -16,3 +16,5 @@ export const PLAYER_RULES = {
         homeStretchPos: 37,
     },
 };
+
+export const MAX_TRAVEL_DISTANCE = 50;

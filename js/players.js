@@ -1,4 +1,4 @@
-import { PLAYER_RULES } from "./playerRules.js";
+import { MAX_TRAVEL_DISTANCE, PLAYER_RULES } from "./playerRules.js";
 
 export class Player {
     constructor(playerEnum) {
@@ -10,15 +10,19 @@ export class Player {
     }
 
     hasPieceInPlay() {
-        return this.pieces.some(piece => piece.inPlay === true);
+        return this.pieces.some(piece => piece.inPlay);
     }
 
     hasOnePieceInPlay() {
-        return this.pieces.filter(piece => piece.inPlay === true).length === 1;
+        return this.pieces.filter(piece => piece.inPlay).length === 1;
+    }
+
+    getOnlyPieceInPlay() {
+        return this.pieces.filter(piece => piece.inPlay)[0];
     }
 
     hasManyPieceInPlay() {
-        return this.pieces.filter(piece => piece.inPlay === true).length > 1;
+        return this.pieces.filter(piece => piece.inPlay).length > 1;
     }
 
     hasManyPieceOnOneSquareOnly() {
@@ -38,21 +42,41 @@ export class Player {
     }
 
     getFirstPieceInPlay() {
-        const inPlayPieces = this.pieces.filter(piece => piece.inPlay == true);
+        const inPlayPieces = this.pieces.filter(piece => piece.inPlay);
         return inPlayPieces[0];
     }
 
     getFirstPieceAtStart() {
-        const inPlayPieces = this.pieces.filter(piece => piece.inPlay != true);
+        const inPlayPieces = this.pieces.filter(piece => !piece.inPlay && !piece.home);
         return inPlayPieces[0];
     }
 
-    hasMultiplePossibleMoves() {
-        return true;
+    getPossibleMovesCount(rolled) {
+        let possibleMoves = 0;
+        for (var piece of this.pieces) {
+            if ((!piece.homeStretch && piece.distanceTraveled + rolled < MAX_TRAVEL_DISTANCE + 6) ||
+                (piece.homeStretch && piece.distanceTraveled + rolled < 6) ||
+                (!piece.inPlay && !piece.home && rolled == 6)) {
+                possibleMoves++;
+            }
+        }
+        return possibleMoves;
     }
 
-    hasAnyPossibleMoves() {
-        return true;
+    hasMultiplePossibleMoves(rolled) {
+        return this.getPossibleMovesCount(rolled) > 1;
+    }
+
+    getOnlyPossibleMove(rolled) {
+        if (this.getPossibleMovesCount(rolled) == 1) {
+            for (var piece of this.pieces) {
+                if ((!piece.homeStretch && piece.distanceTraveled + rolled < MAX_TRAVEL_DISTANCE + 6) ||
+                    (piece.homeStretch && piece.distanceTraveled + rolled < 6) ||
+                    (!piece.inPlay && !piece.home && rolled == 6)) {
+                    return piece;
+                }
+            }
+        };
     }
 
     hasAllPiecesHome() {

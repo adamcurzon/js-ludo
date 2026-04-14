@@ -13,10 +13,12 @@ A vanilla Javascript Ludo game
 - Allow the user to take opposing pieces
 - Complete check for winner
 - Fix players going out of home stretch
-
-### TODO
 - Finish hasAnyPossibleMoves()
 - Finish hasMultiplePossibleMoves()
+
+### TODO
+- Safe squares
+- Triple roll 3 becomes opponents turn
 - Add a valid html space for the center square
 - Fix overlapping game pieces
 - Animation for dice
