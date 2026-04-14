@@ -24,7 +24,7 @@ export class Player {
     hasManyPieceOnOneSquareOnly() {
         if (!this.hasManyPieceInPlay()) return false;
         let firstPos = null;
-        for (var piece in this.pieces) {
+        for (var piece of this.pieces) {
             if (piece.inPlay == false) continue;
             if (firstPos == null) {
                 firstPos = piece.pos;
