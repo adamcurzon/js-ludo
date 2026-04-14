@@ -9,10 +9,10 @@ A vanilla Javascript Ludo game
 ## Change Log
 
 ### Upcomming Release
-~~- Allow the user to enter the "home stretch"~~
-~~- Allow the user to take opposing pieces~~
-~~- Complete check for winner~~
-~~- Fix players going out of home stretch~~
+- Allow the user to enter the "home stretch"
+- Allow the user to take opposing pieces
+- Complete check for winner
+- Fix players going out of home stretch
 
 ### TODO
 - Finish hasAnyPossibleMoves()
