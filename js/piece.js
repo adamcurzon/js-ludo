@@ -18,6 +18,8 @@ export class Piece {
         this.inPlay = true;
     }
 
+    // true - player is home safe and needs new go
+    // false - any other case
     move(distance) {
         this.inPlay = true;
         while (distance > 0) {
@@ -35,7 +37,9 @@ export class Piece {
             console.log("piece is home safe");
             this.home = true;
             this.inPlay = false;
+            return true;
         }
+        return false;
     }
 
     moveToStart() {

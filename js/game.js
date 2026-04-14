@@ -14,7 +14,6 @@ export class Game {
 
         this.players = [
             new Player("red"),
-            new Player("blue"),
             new Player("yellow"),
         ];
         this.turn = 0;
@@ -115,9 +114,13 @@ export class Game {
                 console.log("Player " + this.currentPlayer().enum + " is forced to move as only one in play");
                 const pieceToMove = this.currentPlayer().getOnlyPieceInPlay();
                 if (pieceToMove.isAbleToMove(rolled)) {
-                    pieceToMove.move(rolled);
+                    const wasFinalMove = pieceToMove.move(rolled);
                     this.clearPieces();
                     this.drawPieces();
+                    if (wasFinalMove) {
+                        this.setupNextMove(true);
+                        return;
+                    }
                     const taken = this.checkForTakes(pieceToMove);
                     if (taken) {
                         console.log("Player " + this.currentPlayer().enum + " gets another turn as they took");
@@ -126,9 +129,8 @@ export class Game {
                     }
                 } else {
                     console.log("Player " + this.currentPlayer().enum + " can not move");
+                    return;
                 }
-                this.setupNextMove();
-                return;
             }
 
             if (this.currentPlayer().hasPieceInPlay() && rolled == 6) {
@@ -154,9 +156,13 @@ export class Game {
                         this.setupNextMove();
                         return;
                     }
-                    pieceToMove.move(rolled);
+                    const wasFinalMove = pieceToMove.move(rolled);
                     this.clearPieces();
                     this.drawPieces();
+                    if (wasFinalMove) {
+                        this.setupNextMove(true);
+                        return;
+                    }
                     const taken = this.checkForTakes(pieceToMove);
                     if (taken) {
                         console.log("Player " + this.currentPlayer().enum + " gets another turn as they took");
@@ -170,9 +176,13 @@ export class Game {
                         this.awatingInput = true;
                     } else if (this.currentPlayer.getPossibleMovesCount(rolled) == 1) {
                         const pieceToMove = this.currentPlayer().getOnlyPossibleMove();
-                        pieceToMove.move(rolled);
+                        const wasFinalMove = pieceToMove.move(rolled);
                         this.clearPieces();
                         this.drawPieces();
+                        if (wasFinalMove) {
+                            this.setupNextMove(true);
+                            return;
+                        }
                         const taken = this.checkForTakes(pieceToMove);
                         if (taken) {
                             console.log("Player " + this.currentPlayer().enum + " gets another turn as they took");
@@ -223,9 +233,13 @@ export class Game {
                 }
                 this.awatingInput = false;
                 console.log("Moving piece");
-                piece.move(this.dice.rolled);
+                const wasFinalMove = piece.move(this.dice.rolled);
                 this.clearPieces();
                 this.drawPieces();
+                if (wasFinalMove) {
+                    this.setupNextMove(true);
+                    return;
+                }
                 const taken = this.checkForTakes(piece);
                 if (taken) {
                     console.log("Player " + this.currentPlayer().enum + " gets another turn as they took");
