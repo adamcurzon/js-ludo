@@ -14,6 +14,7 @@ export class Game {
 
         this.players = [
             new Player("red"),
+            new Player("blue"),
             new Player("yellow"),
         ];
         this.turn = 0;
@@ -205,7 +206,7 @@ export class Game {
                 return;
             }
 
-            if (!piece.inPlay && this.dice.rolled == 6) {
+            if (!piece.inPlay && !piece.home && this.dice.rolled == 6) {
                 this.awatingInput = false;
                 console.log("Moving piece to in play");
                 piece.setInPlay();
