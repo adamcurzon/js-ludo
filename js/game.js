@@ -80,6 +80,8 @@ export class Game {
                 if (piece.pos == pieceMoved.pos) {
                     console.log(this.currentPlayer().enum + " has taken " + opponent.enum + "'s piece");
                     piece.moveToStart();
+                    this.clearPieces();
+                    this.drawPieces();
                     return true;
                 }
             }
