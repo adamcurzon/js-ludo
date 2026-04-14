@@ -127,7 +127,7 @@ export class Game {
                     console.log("Player " + this.currentPlayer().enum + " can not move");
                 }
                 this.setupNextMove();
-                return
+                return;
             }
 
             if (this.currentPlayer().hasPieceInPlay() && rolled == 6) {
@@ -148,6 +148,11 @@ export class Game {
                 if (this.currentPlayer().hasManyPieceOnOneSquareOnly()) {
                     console.log("Player " + this.currentPlayer().enum + " is forced to move piece as all in same pos");
                     const pieceToMove = this.currentPlayer().getFirstPieceInPlay();
+                    if (!pieceToMove.isAbleToMove(rolled)) {
+                        console.log("Player " + this.currentPlayer().enum + " can't move due to home stretch and length of roll");
+                        this.setupNextMove();
+                        return;
+                    }
                     pieceToMove.move(rolled);
                     this.clearPieces();
                     this.drawPieces();
