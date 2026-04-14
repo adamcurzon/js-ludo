@@ -52,6 +52,7 @@ export class Player {
     }
 
     getPossibleMovesCount(rolled) {
+        // TODO: This does not factor in pieces being on the same sqaure
         let possibleMoves = 0;
         for (var piece of this.pieces) {
             if ((!piece.homeStretch && piece.distanceTraveled + rolled < MAX_TRAVEL_DISTANCE + 6) ||
@@ -70,13 +71,14 @@ export class Player {
     getOnlyPossibleMove(rolled) {
         if (this.getPossibleMovesCount(rolled) == 1) {
             for (var piece of this.pieces) {
+                // TODO: Potential fail if a piece is in the homeStretch and one is in the start???
                 if ((!piece.homeStretch && piece.distanceTraveled + rolled < MAX_TRAVEL_DISTANCE + 6) ||
                     (piece.homeStretch && piece.distanceTraveled + rolled < 6) ||
                     (!piece.inPlay && !piece.home && rolled == 6)) {
                     return piece;
                 }
             }
-        };
+        }
     }
 
     hasAllPiecesHome() {

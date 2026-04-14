@@ -18,6 +18,7 @@ A vanilla Javascript Ludo game
 - When a players piece gets "home" give them another turn
 
 ### TODO
+- Fix all the TODO bugs - Potentially map out all possible moves and then allow them, if only one force that move
 - Use check for winner
 - If a player lands on a square with 2 opponent pieces of the same team they can not take!!
     - At the minute they will take the first piece that is found in checkForTakes

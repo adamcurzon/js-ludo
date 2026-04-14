@@ -13,8 +13,8 @@ export class Game {
         this.playerIndicator = new PlayerIndicator();
 
         this.players = [
-            new Player("red"),
-            new Player("yellow"),
+            new Player("blue"),
+            new Player("green"),
         ];
         this.turn = 0;
         this.awatingInput = false;
@@ -129,12 +129,15 @@ export class Game {
                     }
                 } else {
                     console.log("Player " + this.currentPlayer().enum + " can not move");
-                    return;
                 }
+                this.setupNextMove();
+                return;
             }
 
+            // TODO: This could also be many pieces? why is it here?!?!?!?!
             if (this.currentPlayer().hasPieceInPlay() && rolled == 6) {
                 if (this.currentPlayer().hasMultiplePossibleMoves(rolled)) {
+                    // TODO: At this point they might not be able to bring a piece out???
                     console.log("Player " + this.currentPlayer().enum + " has choice to bring out or move");
                     this.awatingInput = true;
                 } else {
@@ -174,7 +177,7 @@ export class Game {
                     if (this.currentPlayer().hasMultiplePossibleMoves(rolled)) {
                         console.log("Player " + this.currentPlayer().enum + " has choice of which inplay piece to move");
                         this.awatingInput = true;
-                    } else if (this.currentPlayer.getPossibleMovesCount(rolled) == 1) {
+                    } else if (this.currentPlayer().getPossibleMovesCount(rolled) == 1) {
                         const pieceToMove = this.currentPlayer().getOnlyPossibleMove();
                         const wasFinalMove = pieceToMove.move(rolled);
                         this.clearPieces();
