@@ -74,9 +74,9 @@ export class Game {
 
     checkForTakes(pieceMoved) {
         const opponents = this.players.filter(player => player.enum != this.currentPlayer().enum);
-        for (var opponent in opponents) {
+        for (var opponent of opponents) {
             const opponentsinPlayPieces = opponent.pieces.filter(piece => piece.inPlay == true);
-            for (var piece in opponentsinPlayPieces) {
+            for (var piece of opponentsinPlayPieces) {
                 if (piece.pos == pieceMoved.pos) {
                     console.log(this.currentPlayer().enum + " has taken " + opponent.enum + "'s piece");
                     piece.moveToStart();
