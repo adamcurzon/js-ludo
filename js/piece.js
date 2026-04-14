@@ -40,6 +40,7 @@ export class Piece {
     moveToStart() {
         this.pos = PLAYER_RULES[player].startPos;
         this.inPlay = false;
+        this.distanceTraveled = 0;
     }
 
     isAbleToMove(distance) {

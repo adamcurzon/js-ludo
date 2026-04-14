@@ -75,7 +75,8 @@ export class Game {
     checkForTakes(pieceMoved) {
         const opponents = this.players.filter(player => player.enum != this.currentPlayer().enum);
         for (var opponent in opponents) {
-            for (var piece in opponent.pieces) {
+            const opponentsinPlayPieces = opponent.pieces.filter(piece => piece.inPlay == true);
+            for (var piece in opponentsinPlayPieces) {
                 if (piece.pos == pieceMoved.pos) {
                     console.log(this.currentPlayer().enum + " has taken " + opponent.enum + "'s piece");
                     piece.moveToStart();
@@ -152,6 +153,7 @@ export class Game {
                         this.setupNextMove(true);
                         return;
                     }
+                    this.setupNextMove();
                 } else {
                     if (this.currentPlayer().hasMultiplePossibleMoves()) {
                         console.log("Player " + this.currentPlayer().enum + " has choice of which inplay piece to move");
