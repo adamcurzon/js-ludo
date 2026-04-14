@@ -1,0 +1,280 @@
+body {
+    margin: 0 auto;
+    font-family: sans-serif;
+    background-color: #111;
+    color: white;
+    text-align: center;
+}
+
+:root {
+    --game-board-size: 500px;
+    --home-size: 200px;
+    --positions-grid-width: calc(var(--game-board-size) - calc(var(--home-size) * 2));
+    --yellow: rgb(146, 146, 0);
+    --green: green;
+    --red: red;
+    --blue: blue;
+}
+
+#board {
+    width: var(--game-board-size);
+    height: var(--game-board-size);
+    background-color: white;
+    margin: 0 auto;
+    position: relative;
+}
+
+.homes,
+.positions {
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    top: 0;
+}
+
+.homes .home {
+    width: var(--home-size);
+    height: var(--home-size);
+    /* background-color: orange; */
+    position: absolute;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    box-sizing: border-box;
+}
+
+.homes .home.yellow {
+    top: 0;
+    right: 0;
+    border: calc(var(--positions-grid-width) / 3) solid var(--yellow);
+}
+
+.homes .home.green {
+    bottom: 0;
+    right: 0;
+    border: calc(var(--positions-grid-width) / 3) solid green;
+}
+
+.homes .home.red {
+    bottom: 0;
+    left: 0;
+    border: calc(var(--positions-grid-width) / 3) solid red;
+}
+
+.homes .home.blue {
+    top: 0;
+    left: 0;
+    border: calc(var(--positions-grid-width) / 3) solid blue;
+}
+
+.home .start {
+    width: calc(var(--positions-grid-width) / 3);
+    height: calc(var(--positions-grid-width) / 3);
+    border-radius: 100%;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home .start svg {
+    padding: 5px;
+}
+
+.positions-holder .position-holder {
+    width: var(--positions-grid-width);
+    height: var(--home-size);
+    position: absolute;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+
+    grid-auto-flow: column;
+}
+
+.positions-holder .position-holder.yellow {
+    top: 0;
+    left: 200px;
+}
+
+.positions-holder .position-holder.red {
+    bottom: calc(var(--home-size) * -1);
+    left: 200px;
+    transform: rotate(-180deg);
+    transform-origin: top center;
+}
+
+.positions-holder .position-holder.green {
+    top: calc(var(--home-size) + calc(var(--positions-grid-width) / 2));
+    right: calc(-1 * calc(var(--positions-grid-width) / 2));
+    transform: rotate(90deg);
+    transform-origin: top center;
+}
+
+.positions-holder .position-holder.blue {
+    top: calc(var(--home-size) + calc(var(--positions-grid-width) / 2));
+    left: calc(-1 * calc(var(--positions-grid-width) / 2));
+    transform: rotate(-90deg);
+    transform-origin: top center;
+}
+
+.position {
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+
+.position svg {
+    padding: 5px;
+}
+
+.position-holder.yellow .position:nth-child(n+8):nth-child(-n+12) {
+    background-color: var(--yellow);
+}
+
+.position-holder.green .position:nth-child(14) {
+    background-color: green;
+}
+
+.position-holder.green .position:nth-child(n+8):nth-child(-n+12) {
+    background-color: green;
+}
+
+.position-holder.red .position:nth-child(14) {
+    background-color: red;
+}
+
+.position-holder.red .position:nth-child(n+8):nth-child(-n+12) {
+    background-color: red;
+}
+
+.position-holder.yellow .position:nth-child(14) {
+    background-color: var(--yellow);
+}
+
+.position-holder.blue .position:nth-child(n+8):nth-child(-n+12) {
+    background-color: blue;
+}
+
+.position-holder.blue .position:nth-child(14) {
+    background-color: blue;
+}
+
+.center {
+    --center-border-size: calc(var(--positions-grid-width) / 2);
+    position: relative;
+    z-index: 999;
+    width: 0px;
+    height: 0px;
+    border-top: var(--center-border-size) solid var(--yellow);
+    border-right: var(--center-border-size) solid green;
+    border-bottom: var(--center-border-size) solid red;
+    border-left: var(--center-border-size) solid blue;
+    left: calc(50% - var(--center-border-size));
+    top: calc(50% - var(--center-border-size));
+}
+
+.piece {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+    background-color: white;
+}
+
+.yellow.piece svg {
+    fill: var(--yellow);
+}
+
+.green.piece svg {
+    fill: green;
+}
+
+.red.piece svg {
+    fill: red;
+}
+
+.blue.piece svg {
+    fill: blue;
+}
+
+.position-holder.green .piece {
+    transform: rotate(-90deg);
+}
+
+.position-holder.red .piece {
+    transform: rotate(180deg);
+}
+
+.position-holder.blue .piece {
+    transform: rotate(90deg);
+}
+
+.controls {
+    width: var(--game-board-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 50px;
+    gap: 10px;
+}
+
+.controls button {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    background-color: cadetblue;
+    padding: 15px 40px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.controls button:active {
+    background-color: rgb(69, 124, 126);
+}
+
+.controls button:disabled {
+    background-color: #ccc;
+}
+
+.controls .dice {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 5px;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.controls .player {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.controls .player svg {
+    padding: 10px;
+    fill: black;
+}
+
+.controls .player.red {
+    background-color: red;
+}
+
+.controls .player.yellow {
+    background-color: var(--yellow);
+}
