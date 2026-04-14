@@ -17,6 +17,9 @@ A vanilla Javascript Ludo game
 - Finish hasMultiplePossibleMoves()
 
 ### TODO
+- If a player lands on a square with 2 opponent pieces of the same team they can not take!!
+    - At the minute they will take the first piece that is found in checkForTakes
+- When a players piece gets "home" give them another
 - Safe squares
 - Triple roll 3 becomes opponents turn
 - Add a valid html space for the center square
