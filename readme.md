@@ -6,18 +6,24 @@ A vanilla Javascript Ludo game
 
 <img width=200 src="./docs/reference.png" />
 
-## TODO
-- Allow the user to enter the "home stretch"
-- Allow the user to take opposing pieces
+## Change Log
+
+### Upcomming Release
+~~- Allow the user to enter the "home stretch"~~
+~~- Allow the user to take opposing pieces~~
+~~- Complete check for winner~~
+~~- Fix players going out of home stretch~~
+
+### TODO
+- Finish hasAnyPossibleMoves()
+- Finish hasMultiplePossibleMoves()
 - Add a valid html space for the center square
 - Fix overlapping game pieces
 - Animation for dice
 - Animation for player indicator
 - Animate pieces
-- Complete check for winner
 
 ## Pseudo Code Plan
-~~1. Create a game board~~
 
 1. Assume 2 players for now hard coded as yellow and red
 2. 4 Pieces are created for each player in the starting squares

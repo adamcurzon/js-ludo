@@ -8,8 +8,10 @@ export class Piece {
 
         this.inPlay = false;
         this.homeStretch = false;
+        this.home = false;
 
         this.pos = PLAYER_RULES[player].startPos;
+        this.distanceTraveled = 0;
     }
 
     setInPlay() {
@@ -18,11 +20,32 @@ export class Piece {
 
     move(distance) {
         this.inPlay = true;
-        this.pos += distance;
-        this.pos = this.pos % 52;
-        if (this.pos > PLAYER_RULES[this.player].homeStretchPos) {
-            console.log("Past home stretch");
+        while (distance > 0) {
+            this.pos++;
+            this.pos = this.pos % 52;
+            this.distanceTraveled++;
+            if (this.distanceTraveled > 52 && !this.homeStretch) {
+                this.homeStretch = true;
+                console.log("piece has hit home stretch");
+                pos = 0;
+            }
+            distance--;
         }
+        if (this.homeStretch && this.pos == 6) {
+            console.log("piece is home safe");
+            this.home = true;
+        }
+    }
+
+    moveToStart() {
+        this.pos = PLAYER_RULES[player].startPos;
+        this.inPlay = false;
+    }
+
+    isAbleToMove(distance) {
+        if (!this.homeStretch) return true;
+        if (this.pos + distance > 6) return false;
+        return true;
     }
 
     html() {
@@ -67,6 +90,8 @@ export class Piece {
 
         if (this.homeStretch) {
             console.log("Home stretch", this.index, this.player);
+            console.log('div[data-pos="home-stretch-' + this.player + '-' + this.pos + '"]');
+            piecePositionDiv = document.querySelector('div[data-pos="home-stretch-' + this.player + '-' + this.pos + '"]');
             return;
         }
 

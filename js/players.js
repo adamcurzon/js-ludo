@@ -20,4 +20,42 @@ export class Player {
     hasManyPieceInPlay() {
         return this.pieces.filter(piece => piece.inPlay === true).length > 1;
     }
+
+    hasManyPieceOnOneSquareOnly() {
+        if (!this.hasManyPieceInPlay()) return false;
+        let firstPos = null;
+        for (var piece in this.pieces) {
+            if (piece.inPlay == false) continue;
+            if (firstPos == null) {
+                firstPos = piece.pos;
+            } else {
+                if (firstPos != piece.pos) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    getFirstPieceInPlay() {
+        const inPlayPieces = this.pieces.filter(piece => piece.inPlay == true);
+        return inPlayPieces[0];
+    }
+
+    getFirstPieceAtStart() {
+        const inPlayPieces = this.pieces.filter(piece => piece.inPlay != true);
+        return inPlayPieces[0];
+    }
+
+    hasMultiplePossibleMoves() {
+        return true;
+    }
+
+    hasAnyPossibleMoves() {
+        return true;
+    }
+
+    hasAllPiecesHome() {
+        return this.pieces.every(piece => piece.home == true);
+    }
 }
