@@ -14,6 +14,7 @@ A vanilla Javascript Ludo game
 - Animation for dice
 - Animation for player indicator
 - Animate pieces
+- Complete check for winner
 
 ## Pseudo Code Plan
 ~~1. Create a game board~~
